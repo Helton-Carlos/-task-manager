@@ -22,14 +22,15 @@ definePageMeta({
       id="email"
       type="email"
       v-model="formLogin.email"
-      placeholder="Enter your username"
+      placeholder="ex: john@gmail.com"
     />
+
     <GTInput
       labelTitle="Password"
       id="password"
       type="password"
       v-model="formLogin.password"
-      placeholder="Enter your password"
+      placeholder="ex: tes4@#$%"
     />
     <GTButton type="submit">Login</GTButton>
   </form>
