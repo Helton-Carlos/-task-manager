@@ -7,6 +7,14 @@ defineProps<{
   placeholder?: string;
   disabled?: boolean;
 }>();
+
+const emit = defineEmits<{
+  (e: 'update:modelValue', value: string | number): void;
+}>();
+
+function handleInput(event: Event) {
+  emit('update:modelValue', (event.target as HTMLInputElement).value);
+}
 </script>
 
 <template>
@@ -18,6 +26,7 @@ defineProps<{
       :placeholder="placeholder || ''"
       :disabled="disabled || false"
       :value="modelValue"
+      @input="handleInput"
     />
   </div>
 </template>
