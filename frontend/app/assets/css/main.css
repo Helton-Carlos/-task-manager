@@ -8,10 +8,18 @@
   box-sizing: border-box;
 }
 
+header {
+  @apply bg-gray-500 w-full p-4;
+}
+
+input {
+  @apply border border-gray-300 rounded px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500;
+}
+
 .container {
   @apply w-[90%] mx-auto;
 }
 
-header {
-  @apply bg-gray-500 w-full p-4;
+.form-login {
+  @apply max-w-md bg-gray-200 flex flex-col gap-4  mx-auto mt-10 p-6 border border-gray-200 rounded shadow;
 }

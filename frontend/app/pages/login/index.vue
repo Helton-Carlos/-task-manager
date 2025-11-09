@@ -9,26 +9,28 @@ async function login() {
     navigateTo('/');
   }
 }
+
+definePageMeta({
+  layout: 'login',
+});
 </script>
 
 <template>
-  <div>
-    <form @submit.prevent="login">
-      <GTInput
-        labelTitle="E-mail"
-        id="email"
-        type="email"
-        v-model="formLogin.email"
-        placeholder="Enter your username"
-      />
-      <GTInput
-        labelTitle="Password"
-        id="password"
-        type="password"
-        v-model="formLogin.password"
-        placeholder="Enter your password"
-      />
-      <button type="submit">Login</button>
-    </form>
-  </div>
+  <form @submit.prevent="login" class="form-login">
+    <GTInput
+      labelTitle="E-mail"
+      id="email"
+      type="email"
+      v-model="formLogin.email"
+      placeholder="Enter your username"
+    />
+    <GTInput
+      labelTitle="Password"
+      id="password"
+      type="password"
+      v-model="formLogin.password"
+      placeholder="Enter your password"
+    />
+    <GTButton type="submit">Login</GTButton>
+  </form>
 </template>
