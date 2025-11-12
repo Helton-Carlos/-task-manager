@@ -1,7 +1,7 @@
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
-  modules: ["@nuxtjs/tailwindcss", "nuxt-toast"],
+  modules: ["@nuxtjs/tailwindcss", "nuxt-toast", "@nuxt/eslint"],
   css: ["~/assets/css/main.css"],
   nitro: { compressPublicAssets: true },
   toast: {

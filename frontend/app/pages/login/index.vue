@@ -48,25 +48,35 @@ definePageMeta({
 </script>
 
 <template>
-  <form @submit.prevent="login" class="form-login">
-    <GTInput
-      labelTitle="E-mail"
-      id="email"
-      type="email"
-      v-model="email"
-      placeholder="ex: john@gmail.com"
-    />
-    <p class="text-red-500 text-sm">{{ emailError }}</p>
+  <div class="flex justify-between">
+    <div class="bg-blue-300 w-[30%] h-screen">
+      <h1 class="font-bold text-white">CRM</h1>
+    </div>
 
-    <GTInput
-      labelTitle="Password"
-      id="password"
-      type="password"
-      v-model="password"
-      placeholder="ex: tes4@#$%"
-    />
-    <p class="text-red-500 text-sm">{{ passwordError }}</p>
+    <div
+      class="min-h-screen w-full bg-gray-50 flex justify-center items-center"
+    >
+      <form class="form-login" @submit.prevent="login">
+        <GTInput
+          id="email"
+          v-model="email"
+          label-title="E-mail"
+          type="email"
+          placeholder="ex: john@gmail.com"
+        />
+        <p class="text-red-500 text-sm">{{ emailError }}</p>
 
-    <GTButton type="submit">Login</GTButton>
-  </form>
+        <GTInput
+          id="password"
+          v-model="password"
+          label-title="Password"
+          type="password"
+          placeholder="ex: tes4@#$%"
+        />
+        <p class="text-red-500 text-sm">{{ passwordError }}</p>
+
+        <GTButton type="submit">Login</GTButton>
+      </form>
+    </div>
+  </div>
 </template>

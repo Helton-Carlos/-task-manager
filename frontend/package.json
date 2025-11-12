@@ -5,6 +5,9 @@
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
+    "prepare": "nuxt prepare",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
@@ -19,6 +22,10 @@
     "yup": "^1.7.1"
   },
   "devDependencies": {
-    "@nuxtjs/tailwindcss": "^6.14.0"
+    "@nuxt/eslint": "^1.10.0",
+    "@nuxtjs/tailwindcss": "^6.14.0",
+    "eslint": "^9.39.1",
+    "prettier-plugin-tailwindcss": "^0.7.1",
+    "typescript": "^5.9.3"
   }
 }
