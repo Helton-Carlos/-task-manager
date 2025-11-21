@@ -1,5 +1,5 @@
 <template>
   <div>
-    <h2>dahboard</h2>
+    <h2>CRM</h2>
   </div>
 </template>

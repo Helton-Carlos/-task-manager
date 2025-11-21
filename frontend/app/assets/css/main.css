@@ -8,8 +8,12 @@
   box-sizing: border-box;
 }
 
+body {
+  @apply bg-gray-200;
+}
+
 header {
-  @apply bg-gray-500 w-full p-4;
+  @apply w-full bg-white flex justify-between items-center p-4;
 }
 
 input {
