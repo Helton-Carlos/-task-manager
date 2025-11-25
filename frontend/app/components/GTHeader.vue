@@ -5,7 +5,7 @@ const user = ref<{ name: string }>({ name: "John Doe" });
 
 <template>
   <header>
-    <div class="container flex justify-between items-center">
+    <div class="container flex justify-between items-center flex-wrap gap-4">
       <div>
         <h3 class="font-bold text-gray-500">Olá, {{ user.name }}</h3>
       </div>
@@ -21,10 +21,13 @@ const user = ref<{ name: string }>({ name: "John Doe" });
 
       <nav>
         <ul class="flex items-center gap-2">
-          <li class="flex items-center gap-1">
+          <nuxt-link
+            to="/configuracoes"
+            class="flex items-center gap-1 text-gray-500 cursor-pointer"
+          >
             <Icon name="lucide:settings" size="24" color="blue" />
-            <span>test</span>
-          </li>
+            <span class="font-bold">Configuração</span>
+          </nuxt-link>
         </ul>
       </nav>
     </div>

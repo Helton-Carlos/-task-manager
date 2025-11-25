@@ -7,18 +7,18 @@ const menu = ref<{ icon: string; label: string; path: string }[]>([
   },
   {
     icon: "lucide:phone-call",
-    label: "Realizar Chamado",
-    path: "/",
+    label: "Iniciar chamado",
+    path: "/iniciar-chamado",
   },
   {
     icon: "lucide:history",
     label: "Histórico",
-    path: "/",
+    path: "/historico",
   },
   {
     icon: "lucide:settings",
     label: "Configurações",
-    path: "",
+    path: "/configuracoes",
   },
 ]);
 </script>
@@ -35,14 +35,15 @@ const menu = ref<{ icon: string; label: string; path: string }[]>([
 
     <nav class="container flex-1 mt-8">
       <ul class="flex flex-col justify-center gap-8 mx-4">
-        <li
+        <NuxtLink
           v-for="item in menu"
           :key="item.path"
+          :to="item.path"
           class="text-sm text-gray-500 hover:text-blue-500 font-bold flex items-center gap-2 cursor-pointer"
         >
           <Icon :name="item.icon" size="24" color="blue" />
           <span class="text-sm">{{ item.label }}</span>
-        </li>
+        </NuxtLink>
       </ul>
     </nav>
 

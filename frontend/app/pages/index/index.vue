@@ -2,7 +2,7 @@
   <div class="container">
     <div class="flex flex-wrap gap-8 mt-8">
       <div class="card-blue">
-        <h2 class="text-bold text-xl">CRM</h2>
+        <h3 class="text-bold text-xl">CRM</h3>
 
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi magni,
@@ -13,7 +13,7 @@
       </div>
 
       <div class="card-blue">
-        <h2 class="text-bold text-xl">CRM</h2>
+        <h3 class="text-bold text-xl">CRM</h3>
 
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi magni,
@@ -24,7 +24,7 @@
       </div>
 
       <div class="card-blue">
-        <h2 class="text-bold text-xl">CRM</h2>
+        <h3 class="text-bold text-xl">CRM</h3>
 
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi magni,
