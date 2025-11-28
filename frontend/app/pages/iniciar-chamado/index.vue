@@ -103,6 +103,12 @@ const sectorOption = [
   </div>
 
   <GTModal>
-    <div>teste</div>
+    <template #title>
+      <h3 class="text-lg font-semibold">Título do Modal</h3>
+    </template>
+
+    <template #body>
+      <p class="font-semibold">teste</p>
+    </template>
   </GTModal>
 </template>
