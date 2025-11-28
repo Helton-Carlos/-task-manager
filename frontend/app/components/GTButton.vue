@@ -8,7 +8,7 @@ const props = defineProps<{
 const disabledClass = computed(() => {
   return props.disabled
     ? 'bg-gray-400 text-white font-semibold py-2 px-4 rounded cursor-not-allowed'
-    : 'bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded cursor-pointer';
+    : 'btn-primary';
 });
 </script>
 

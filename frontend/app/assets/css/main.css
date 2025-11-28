@@ -22,11 +22,23 @@ select {
 }
 
 h2 {
-  @apply text-gray-500 my-4 font-bold text-xl;
+  @apply text-gray-500 my-2 font-bold text-xl;
+}
+
+h3 {
+  @apply text-gray-500 my-2 font-bold text-lg;
+}
+
+.btn-primary {
+  @apply bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded cursor-pointer;
+}
+
+.btn-secondary {
+  @apply bg-blue-700 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded cursor-pointer;
 }
 
 .card {
-  @apply bg-white w-full p-4 rounded-md shadow-md;
+  @apply bg-white w-full md:max-w-[380px] p-4 text-gray-500 rounded-md shadow-md;
 }
 
 .card-blue {
