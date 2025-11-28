@@ -13,10 +13,7 @@
         </div>
 
         <div class="p-4 border-t flex justify-end gap-2">
-          <slot name="footer">
-            <GTButton underline>Cancelar</GTButton>
-            <GTButton> Salvar </GTButton>
-          </slot>
+          <slot name="footer" />
         </div>
       </div>
     </div>

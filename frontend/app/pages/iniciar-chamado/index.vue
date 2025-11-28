@@ -110,5 +110,10 @@ const sectorOption = [
     <template #body>
       <p class="font-semibold">teste</p>
     </template>
+
+    <template #footer>
+      <GTButton underline>Cancelar</GTButton>
+      <GTButton> Salvar </GTButton>
+    </template>
   </GTModal>
 </template>
