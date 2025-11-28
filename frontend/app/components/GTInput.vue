@@ -2,8 +2,17 @@
 defineProps<{
   labelTitle?: string;
   id?: string;
-  modelValue: string | number;
-  type?: string;
+  modelValue: string | number | Date;
+  type?:
+    | "text"
+    | "checkbox"
+    | "password"
+    | "submit"
+    | "button"
+    | "email"
+    | "number"
+    | "checkbox"
+    | "date";
   placeholder?: string;
   disabled?: boolean;
 }>();
