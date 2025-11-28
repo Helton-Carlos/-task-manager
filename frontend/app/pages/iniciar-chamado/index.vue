@@ -66,7 +66,7 @@ const sectorOption = [
         />
       </div>
 
-      <div class="flex gap-4">
+      <div class="flex flex-wrap gap-4">
         <GTInput
           label-title="Tipo de atendimento"
           :model-value="typeCall"
@@ -101,4 +101,8 @@ const sectorOption = [
       </div>
     </div>
   </div>
+
+  <GTModal>
+    <div>teste</div>
+  </GTModal>
 </template>
