@@ -26,3 +26,31 @@ export const loginUser = (req: Request<{}, {}, User>, res: Response): void => {
     res.status(500).json({ erro: 'Erro no servidor' });
   }
 };
+
+export const createUser = (req: Request<{}, {}, User>, res: Response): void => {
+  const { nome, email, password } = req.body;
+
+  console.log(nome, email, password);
+
+  try {
+    const stmt = db.prepare(
+      'INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)',
+    );
+
+    const result = stmt.run(nome, email, password);
+
+    res.status(201).json({
+      mensagem: 'Usuário criado com sucesso!',
+      id: result.lastInsertRowid,
+    });
+  } catch (error: any) {
+    console.error('Erro ao criar usuário:', error);
+
+    if (error.message.includes('UNIQUE')) {
+      res.status(409).json({ erro: 'Email já cadastrado' });
+      return;
+    }
+
+    res.status(500).json({ erro: 'Erro no servidor' });
+  }
+};
