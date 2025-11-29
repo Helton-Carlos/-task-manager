@@ -1,20 +1,16 @@
 import type { Request, Response } from 'express';
-import { createDB } from '../db/database';
+import { db } from '../db/database';
 import type { User } from '../types/user';
 
-export const loginUser = async (
-  req: Request<{}, {}, User>,
-  res: Response,
-): Promise<void> => {
+export const loginUser = (req: Request<{}, {}, User>, res: Response): void => {
   const { nome, password } = req.body;
 
   try {
-    const db = await createDB();
-
-    const user = await db.get<User>(
+    const stmt = db.prepare(
       'SELECT id, nome, email FROM usuarios WHERE nome = ? AND senha = ?',
-      [nome, password],
     );
+
+    const user = stmt.get(nome, password) as User | undefined;
 
     if (!user) {
       res.status(401).json({ autenticado: false });
@@ -23,14 +19,10 @@ export const loginUser = async (
 
     res.status(200).json({
       autenticado: true,
-      usuario: {
-        id: user.id,
-        nome: user.nome,
-        email: user.email,
-      },
+      usuario: user,
     });
-  } catch (err) {
-    console.error('Erro ao verificar usuário:', err);
+  } catch (error) {
+    console.error('Erro ao verificar usuário:', error);
     res.status(500).json({ erro: 'Erro no servidor' });
   }
 };
