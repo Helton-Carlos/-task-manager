@@ -1,11 +1,54 @@
 <script setup lang="ts">
-const name = ref<string>("John Doe");
-const today = new Date(Date.UTC(96, 11, 1, 0, 0, 0));
-const typeCall = ref<string>("Financeiro");
-const sector = ref<string>("");
-const company = ref<string>("");
-const priority = ref<string>("");
+import { useForm, useField } from "vee-validate";
+import * as yup from "yup";
+
 const modal = useTemplateRef("modal");
+const schema = yup.object({
+  name: yup.string().required("O nome é obrigatório"),
+  today: yup.string().required("A data é obrigatória"),
+  typeCall: yup.string().required("O tipo de atendimento é obrigatório"),
+  sector: yup.string().required("O setor é obrigatório"),
+  company: yup.string().required("A empresa é obrigatória"),
+  priority: yup.string().required("A prioridade é obrigatória"),
+});
+
+const { handleSubmit } = useForm({ validationSchema: schema });
+
+const { value: name, errorMessage: nameError } = useField<string>(
+  "name",
+  undefined,
+  { initialValue: "" }
+);
+
+const { value: today, errorMessage: todayError } = useField<string>(
+  "today",
+  undefined,
+  { initialValue: "" }
+);
+
+const { value: typeCall, errorMessage: typeCallError } = useField<string>(
+  "typeCall",
+  undefined,
+  { initialValue: "" }
+);
+
+const { value: sector, errorMessage: sectorError } = useField<string>(
+  "sector",
+  undefined,
+  { initialValue: "" }
+);
+
+const { value: company, errorMessage: companyError } = useField<string>(
+  "company",
+  undefined,
+  { initialValue: "" }
+);
+
+const { value: priority, errorMessage: priorityError } = useField<string>(
+  "priority",
+  undefined,
+  { initialValue: "" }
+);
 
 const companyOption = [
   { value: "suco", name: "Caso do suco" },
@@ -35,17 +78,17 @@ const sectorOption = [
   { value: "cs", name: "Customer Success (Sucesso do Cliente)" },
 ];
 
-function openModal() {
-  modal.value?.openModal();
-}
+const submit = handleSubmit((values) => {
+  console.log("Formulário validado com sucesso! Dados:", values);
+  (modal.value as any)?.openModal();
+});
 
 function closeModal() {
-  modal.value?.closeModal();
+  (modal.value as any)?.closeModal();
 }
 
 function initCall() {
-  console.log("hey");
-  modal.value?.closeModal();
+  (modal.value as any)?.closeModal();
 }
 </script>
 
@@ -56,63 +99,83 @@ function initCall() {
     <div class="card-page flex flex-col gap-4">
       <h2>Preencha o formulário</h2>
 
-      <div class="flex flex-wrap gap-4">
-        <GTInput
-          label-title="Colaborador"
-          :model-value="name"
-          type="text"
-          placeholder="digite seu nome"
-        />
+      <form @submit.prevent="submit">
+        <div class="flex flex-wrap gap-4">
+          <div>
+            <GTInput
+              v-model="name"
+              label-title="Colaborador"
+              type="text"
+              placeholder="digite seu nome"
+            />
+            <p class="text-red-500 text-sm">{{ nameError }}</p>
+          </div>
 
-        <GTSelect
-          id="empresa"
-          class="flex-1"
-          label-title="Empresa"
-          :model-value="company"
-          placeholder="ex: casa do suco"
-          :options="companyOption"
-        />
+          <div>
+            <GTSelect
+              id="empresa"
+              v-model="company"
+              class="flex-1"
+              label-title="Empresa"
+              placeholder="ex: casa do suco"
+              :options="companyOption"
+            />
+            <p class="text-red-500 text-sm">{{ companyError }}</p>
+          </div>
 
-        <GTInput
-          label-title="Dia do atendimento"
-          :model-value="today"
-          type="date"
-        />
-      </div>
+          <div>
+            <GTInput
+              v-model="today"
+              label-title="Dia do atendimento"
+              type="date"
+            />
+            <p class="text-red-500 text-sm">{{ todayError }}</p>
+          </div>
+        </div>
 
-      <div class="flex flex-wrap gap-4">
-        <GTInput
-          label-title="Tipo de atendimento"
-          :model-value="typeCall"
-          type="text"
-          placeholder="Financeiro"
-        />
+        <div class="flex flex-wrap gap-4 mt-4">
+          <div>
+            <GTInput
+              v-model="typeCall"
+              label-title="Tipo de atendimento"
+              type="text"
+              placeholder="Financeiro"
+            />
+            <p class="text-red-500 text-sm">{{ typeCallError }}</p>
+          </div>
 
-        <GTSelect
-          id="status"
-          class="flex-1"
-          label-title="Status de prioridade"
-          :model-value="priority"
-          placeholder="ex: sem prioridade"
-          :options="statusOption"
-        />
+          <div>
+            <GTSelect
+              id="status"
+              v-model="priority"
+              class="flex-1"
+              label-title="Status de prioridade"
+              placeholder="ex: sem prioridade"
+              :options="statusOption"
+            />
+            <p class="text-red-500 text-sm">{{ priorityError }}</p>
+          </div>
 
-        <GTSelect
-          id="setores"
-          class="flex-1"
-          label-title="Possível Setores"
-          :model-value="sector"
-          placeholder="ex: Desenvolvimento"
-          :options="sectorOption"
-        />
-      </div>
+          <div>
+            <GTSelect
+              id="setores"
+              v-model="sector"
+              class="flex-1"
+              label-title="Possível Setores"
+              placeholder="ex: Desenvolvimento"
+              :options="sectorOption"
+            />
+            <p class="text-red-500 text-sm">{{ sectorError }}</p>
+          </div>
+        </div>
 
-      <div>
-        <GTButton @click="openModal">
-          <span>Criar chamado</span>
-          <Icon name="lucide:plus" size="24" color="white" />
-        </GTButton>
-      </div>
+        <div class="mt-4">
+          <GTButton type="submit">
+            <span>Criar chamado</span>
+            <Icon name="lucide:plus" size="24" color="white" />
+          </GTButton>
+        </div>
+      </form>
     </div>
   </div>
 
