@@ -3,6 +3,7 @@ import { useForm, useField } from "vee-validate";
 import * as yup from "yup";
 
 const modal = useTemplateRef("modal");
+
 const schema = yup.object({
   name: yup.string().required("O nome é obrigatório"),
   today: yup.string().required("A data é obrigatória"),
@@ -17,7 +18,7 @@ const { handleSubmit } = useForm({ validationSchema: schema });
 const { value: name, errorMessage: nameError } = useField<string>(
   "name",
   undefined,
-  { initialValue: "" }
+  { initialValue: "John Doe" }
 );
 
 const { value: today, errorMessage: todayError } = useField<string>(
@@ -29,7 +30,7 @@ const { value: today, errorMessage: todayError } = useField<string>(
 const { value: typeCall, errorMessage: typeCallError } = useField<string>(
   "typeCall",
   undefined,
-  { initialValue: "" }
+  { initialValue: "Financeiro" }
 );
 
 const { value: sector, errorMessage: sectorError } = useField<string>(
@@ -84,11 +85,11 @@ const submit = handleSubmit((values) => {
 });
 
 function closeModal() {
-  (modal.value as any)?.closeModal();
+  modal.value?.closeModal();
 }
 
 function initCall() {
-  (modal.value as any)?.closeModal();
+  modal.value?.closeModal();
 }
 </script>
 
