@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import { useForm, useField } from "vee-validate";
 import { useBreakpoints } from "~/composables/useBreakpoints";
+import { useApi } from "~/composables/useApi";
 import * as yup from "yup";
+import type { User } from "~/types/user";
+
+const { post } = useApi();
 
 const breakpoints = useBreakpoints();
 
@@ -30,14 +34,28 @@ const { value: password, errorMessage: passwordError } = useField<string>(
 );
 
 const login = handleSubmit(async (values) => {
-  if (values.email && values.password) {
-    await navigateTo("/");
-
-    toast.success({
-      title: "Sucesso",
-      message: "Seja bem-vindo",
+  try {
+    const user = await post<User>("/login", {
+      email: values.email,
+      password: values.password,
     });
-  } else {
+
+    if (user) {
+      await navigateTo("/");
+
+      toast.success({
+        title: "Sucesso",
+        message: "Seja bem-vindo",
+      });
+    } else {
+      toast.error({
+        title: "Erro!",
+        message: "Falha, tente novamente...",
+      });
+    }
+  } catch (error) {
+    console.error(`Falha no login. Detalhes: ${error}`);
+
     toast.error({
       title: "Erro!",
       message: "Falha, tente novamente...",

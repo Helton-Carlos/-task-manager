@@ -1,12 +1,9 @@
+const API_BASE = import.meta.env.TASK_API ?? "http://localhost:8080";
+
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
-  modules: [
-    "@nuxtjs/tailwindcss", 
-    "nuxt-toast", 
-    "@nuxt/eslint", 
-    "@nuxt/icon"
-  ],
+  modules: ["@nuxtjs/tailwindcss", "nuxt-toast", "@nuxt/eslint", "@nuxt/icon"],
   css: ["~/assets/css/main.css"],
   nitro: { compressPublicAssets: true },
   toast: {
@@ -20,10 +17,15 @@ export default defineNuxtConfig({
     },
   },
   icon: {
-    mode: 'css',
-    cssLayer: 'base',
+    mode: "css",
+    cssLayer: "base",
     serverBundle: {
-      collections: ['lucide', 'fa6-brands'] 
-    }
-  } 
+      collections: ["lucide", "fa6-brands"],
+    },
+  },
+  runtimeConfig: {
+    public: {
+      apiUrl: `${API_BASE}/api`,
+    },
+  },
 });
