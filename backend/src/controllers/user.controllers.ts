@@ -1,5 +1,6 @@
-import type { Request, Response } from "express";
 import { db } from "../db/database";
+
+import type { Request, Response } from "express";
 import type { User } from "../types/user";
 
 export const loginUser = (req: Request<User>, res: Response): void => {
