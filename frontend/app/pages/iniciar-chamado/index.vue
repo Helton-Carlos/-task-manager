@@ -1,12 +1,16 @@
 <script setup lang="ts">
 import { useForm, useField } from "vee-validate";
+import { useApi } from "~/composables/useApi";
 import * as yup from "yup";
+import type { Task } from "~/types/task";
 
+const { post } = useApi();
+const toast = useToast();
 const modal = useTemplateRef("modal");
 
 const schema = yup.object({
   name: yup.string().required("O nome é obrigatório"),
-  today: yup.string().required("A data é obrigatória"),
+  createdAt: yup.string().required("A data é obrigatória"),
   typeCall: yup.string().required("O tipo de atendimento é obrigatório"),
   sector: yup.string().required("O setor é obrigatório"),
   company: yup.string().required("A empresa é obrigatória"),
@@ -21,8 +25,8 @@ const { value: name, errorMessage: nameError } = useField<string>(
   { initialValue: "John Doe" }
 );
 
-const { value: today, errorMessage: todayError } = useField<string>(
-  "today",
+const { value: createdAt, errorMessage: createdAtError } = useField<string>(
+  "createdAt",
   undefined,
   { initialValue: "" }
 );
@@ -79,8 +83,35 @@ const sectorOption = [
   { value: "cs", name: "Customer Success (Sucesso do Cliente)" },
 ];
 
-const submit = handleSubmit(() => {
-  modal.value?.openModal();
+const submit = handleSubmit(async (values) => {
+  try {
+    const task = await post<Task>("/task", {
+      name: values.name,
+      created_at: values.createdAt,
+      typeCall: values.typeCall,
+      sector: values.sector,
+      company: values.company,
+      priority: values.priority,
+    });
+
+    if (task) {
+      //await login(user);
+      console.log(task);
+      modal.value?.openModal();
+    } else {
+      toast.error({
+        title: "Erro!",
+        message: "Falha, tente novamente...",
+      });
+    }
+  } catch (error) {
+    console.error(`Falha no login. Detalhes: ${error}`);
+
+    toast.error({
+      title: "Erro!",
+      message: "Falha, tente novamente...",
+    });
+  }
 });
 
 function closeModal() {
@@ -125,11 +156,11 @@ function initCall() {
 
           <div>
             <GTInput
-              v-model="today"
+              v-model="createdAt"
               label-title="Dia do atendimento"
               type="date"
             />
-            <p class="text-red-500 text-sm">{{ todayError }}</p>
+            <p class="text-red-500 text-sm">{{ createdAtError }}</p>
           </div>
         </div>
 
@@ -228,7 +259,7 @@ function initCall() {
         />
 
         <GTInput
-          v-model="today"
+          v-model="createdAt"
           label-title="Dia do atendimento"
           type="date"
           disabled
