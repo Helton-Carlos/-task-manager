@@ -90,7 +90,7 @@ const sectorOption = [
 
 const submit = handleSubmit(async (values) => {
   try {
-    const task = await post<Task>("/created-task", {
+    const task = await post<Task>("/tasks/created-task", {
       user_id: user.value?.id,
       name: values.name,
       created_at: values.createdAt,
@@ -101,8 +101,6 @@ const submit = handleSubmit(async (values) => {
     });
 
     if (task) {
-      //await login(user);
-      console.log(task);
       modal.value?.openModal();
     } else {
       toast.error({

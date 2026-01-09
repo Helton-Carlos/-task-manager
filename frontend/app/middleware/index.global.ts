@@ -7,8 +7,6 @@ export default defineNuxtRouteMiddleware((to, _from) => {
 
   const isAuthenticated = auth.value;
 
-  console.log(isAuthenticated);
-
   if (!isAuthenticated && to.name !== "login") {
     return navigateTo("/login");
   }

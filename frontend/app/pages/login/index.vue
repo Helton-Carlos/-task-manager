@@ -64,7 +64,7 @@ const { value: passwordConfirm, errorMessage: passwordConfirmError } =
 
 const submit = handleSubmit(async (values) => {
   try {
-    const user = await post<User>("/login", {
+    const user = await post<User>("/users/login", {
       email: values.email,
       password: values.password,
     });
