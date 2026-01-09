@@ -90,7 +90,7 @@ const submit = handleSubmit(async (values) => {
 const registerSubmit = handleSubmit(async (values) => {
   if (values.passwordConfirm === values.password) {
     try {
-      const user = await post<User>("/register", {
+      const user = await post<User>("/users/register", {
         name: values.name,
         email: values.email,
         password: values.password,
